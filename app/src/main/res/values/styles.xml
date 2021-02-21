@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="RecyclerViewRowTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/default_text_color</item>
+        <item name="fontFamily">sans-serif-black</item>
+    </style>
+
 </resources>

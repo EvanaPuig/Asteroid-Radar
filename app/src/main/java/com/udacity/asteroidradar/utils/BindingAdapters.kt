@@ -1,8 +1,22 @@
-package com.udacity.asteroidradar
+package com.udacity.asteroidradar.utils
 
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.udacity.asteroidradar.R
+import com.udacity.asteroidradar.main.AsteroidListAdapter
+import com.udacity.asteroidradar.model.Asteroid
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
+    val adapter = recyclerView.adapter as AsteroidListAdapter
+    adapter.submitList(data) {
+        // scroll the list to the top after the diffs are calculated and posted
+        recyclerView.scrollToPosition(0)
+    }
+}
+
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
