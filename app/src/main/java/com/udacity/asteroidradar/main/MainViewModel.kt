@@ -1,49 +1,34 @@
 package com.udacity.asteroidradar.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.udacity.asteroidradar.model.Asteroid
+import android.app.Application
+import androidx.lifecycle.*
+import com.udacity.asteroidradar.database.getDatabase
+import com.udacity.asteroidradar.repository.AsteroidsRepository
+import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
-    private val _asteroidList = MutableLiveData<List<Asteroid>>()
-    val asteroidList: LiveData<List<Asteroid>>
-        get() = _asteroidList
+class MainViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val database = getDatabase(application)
+    private val asteroidsRepository = AsteroidsRepository(database)
 
     init {
-        _asteroidList.value = createTestAsteroids()
+        viewModelScope.launch {
+            asteroidsRepository.refreshAsteroids()
+        }
     }
 
-    private fun createTestAsteroids(): List<Asteroid> {
-        val asteroidList = mutableListOf<Asteroid>()
+    var asteroidList = asteroidsRepository.asteroids
 
-        for ( i in 0..10) {
-            val asteroid = Asteroid(
-                5678,
-                "Test Name",
-                "05-08-21",
-                5.5,
-                5.0,
-                5.0,
-                4.3,
-                false
-            )
-
-            val asteroid2 = Asteroid(
-                4231,
-                "Test Name",
-                "05-07-21",
-                5.5,
-                5.0,
-                5.0,
-                4.3,
-                true
-            )
-
-            asteroidList.add(asteroid)
-            asteroidList.add(asteroid2)
+    /**
+     * Factory for constructing DevByteViewModel with parameter
+     */
+    class Factory(val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return MainViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
         }
-
-        return asteroidList
     }
 }
