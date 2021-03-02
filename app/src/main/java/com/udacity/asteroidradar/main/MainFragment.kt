@@ -20,22 +20,28 @@ class MainFragment : Fragment() {
 
     private var viewModelAdapter: AsteroidListAdapter? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val binding: FragmentMainBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_main,
             container,
-            false)
+            false
+        )
 
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
 
-        val adapter = AsteroidListAdapter(AsteroidClickListener { asteroid ->
-            val action = MainFragmentDirections.actionShowDetail(asteroid)
-            view?.findNavController()?.navigate(action)
-        })
+        val adapter = AsteroidListAdapter(
+            AsteroidClickListener { asteroid ->
+                val action = MainFragmentDirections.actionShowDetail(asteroid)
+                view?.findNavController()?.navigate(action)
+            }
+        )
 
         binding.asteroidRecycler.adapter = adapter
 

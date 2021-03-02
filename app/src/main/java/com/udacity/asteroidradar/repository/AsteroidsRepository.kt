@@ -17,7 +17,7 @@ import org.json.JSONObject
 import timber.log.Timber
 import java.lang.Exception
 
-class AsteroidsRepository (private val database: AsteroidDatabase){
+class AsteroidsRepository(private val database: AsteroidDatabase) {
     private var service = AsteroidApi.retrofitService
 
     val asteroids: LiveData<List<Asteroid>> = Transformations.map(

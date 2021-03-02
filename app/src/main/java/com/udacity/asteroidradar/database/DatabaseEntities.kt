@@ -15,7 +15,8 @@ data class DatabaseAsteroid(
     val estimatedDiameter: Double,
     val relativeVelocity: Double,
     val distanceFromEarth: Double,
-    val isPotentiallyHazardous: Boolean)
+    val isPotentiallyHazardous: Boolean
+)
 
 fun List<DatabaseAsteroid>.asDomainModel(): List<Asteroid> {
     return map {

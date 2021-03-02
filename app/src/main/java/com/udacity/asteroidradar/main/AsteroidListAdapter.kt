@@ -21,9 +21,9 @@ class AsteroidListAdapter(private val clickListener: AsteroidClickListener) : Li
         }
     }
 
-    class AsteroidViewHolder(private var binding: AsteroidRowItemBinding):
+    class AsteroidViewHolder(private var binding: AsteroidRowItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(listener: AsteroidClickListener, asteroid: Asteroid){
+        fun bind(listener: AsteroidClickListener, asteroid: Asteroid) {
             binding.asteroid = asteroid
             binding.clickListener = listener
             bindAsteroidStatusImage(binding.asteroidStatusIcon, asteroid.isPotentiallyHazardous)
@@ -46,7 +46,6 @@ class AsteroidListAdapter(private val clickListener: AsteroidClickListener) : Li
     override fun onBindViewHolder(holderAsteroid: AsteroidViewHolder, position: Int) {
         holderAsteroid.bind(clickListener, getItem(position))
     }
-
 }
 
 class AsteroidClickListener(val clickListener: (asteroid: Asteroid) -> Unit) {

@@ -17,7 +17,6 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
     }
 }
 
-
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
