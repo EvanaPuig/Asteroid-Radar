@@ -1,7 +1,10 @@
 package com.udacity.asteroidradar.main
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.database.getDatabase
 import com.udacity.asteroidradar.repository.AsteroidsRepository
 import kotlinx.coroutines.launch
@@ -14,10 +17,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     init {
         viewModelScope.launch {
             asteroidsRepository.refreshAsteroids()
+            asteroidsRepository.refreshPicOfDay()
         }
     }
 
     var asteroidList = asteroidsRepository.asteroids
+    var picOfDay = asteroidsRepository.pictureOfDay
 
     /**
      * Factory for constructing DevByteViewModel with parameter

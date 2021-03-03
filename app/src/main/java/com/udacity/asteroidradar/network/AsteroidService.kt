@@ -25,11 +25,13 @@ interface AsteroidApiService {
         @Query("end_date") endDate: String,
         @Query("api_key") apiKey: String
     ): String
+
+    @GET("/planetary/apod")
+    suspend fun getPicOfDay(
+        @Query("api_key") apiKey: String
+    ): NetworkPictureOfDay
 }
 
-/**
- * Main entry point for network access.
- */
 object AsteroidApi {
     val retrofitService: AsteroidApiService by lazy {
         retrofit.create(AsteroidApiService::class.java)

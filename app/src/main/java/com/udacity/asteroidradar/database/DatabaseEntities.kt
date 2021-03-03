@@ -41,12 +41,10 @@ data class DatabasePictureOfDay constructor(
     val title: String
 )
 
-fun List<DatabasePictureOfDay>.asPictureOfDayDomainModel(): List<PictureOfDay> {
-    return map {
-        PictureOfDay(
-            url = it.url,
-            mediaType = it.mediaType,
-            title = it.title
+fun DatabasePictureOfDay.asPictureOfDayDomainModel(): PictureOfDay {
+    return PictureOfDay(
+            url = this.url,
+            mediaType = this.mediaType,
+            title = this.title
         )
-    }
 }

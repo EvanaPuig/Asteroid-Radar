@@ -1,8 +1,11 @@
 package com.udacity.asteroidradar.network
 
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.udacity.asteroidradar.database.DatabaseAsteroid
+import com.udacity.asteroidradar.database.DatabasePictureOfDay
 import com.udacity.asteroidradar.model.Asteroid
+import com.udacity.asteroidradar.model.PictureOfDay
 
 @JsonClass(generateAdapter = true)
 data class NetworkAsteroid(
@@ -45,4 +48,30 @@ fun List<NetworkAsteroid>.asDatabaseModel(): Array<DatabaseAsteroid> {
             isPotentiallyHazardous = it.isPotentiallyHazardous
         )
     }.toTypedArray()
+}
+
+data class NetworkPictureOfDay(
+    val url: String,
+    @Json(name = "media_type") val mediaType: String,
+    val title: String
+)
+
+// Convert network results to domain objects
+
+fun NetworkPictureOfDay.asDomainModel(): PictureOfDay {
+    return PictureOfDay(
+        url = this.url,
+        mediaType = this.mediaType,
+        title = this.title
+    )
+}
+
+// Convert data transfer objects(network objects) to database objects
+
+fun NetworkPictureOfDay.asDatabaseModel(): DatabasePictureOfDay {
+    return DatabasePictureOfDay(
+        url = this.url,
+        mediaType = this.mediaType,
+        title = this.title
+    )
 }

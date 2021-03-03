@@ -30,6 +30,16 @@ interface AsteroidDao {
 @Database(entities = [DatabaseAsteroid::class, DatabasePictureOfDay::class], version = 3, exportSchema = false)
 abstract class AsteroidDatabase : RoomDatabase() {
     abstract val asteroidsDao: AsteroidDao
+    abstract val picOfDayDao: PictureOfDayDao
+}
+
+@Dao
+interface PictureOfDayDao {
+    @Query("SELECT * FROM databasepictureofday")
+    fun getPictureOfDay(): LiveData<DatabasePictureOfDay>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPicture(pictureOfDay: DatabasePictureOfDay)
 }
 
 private lateinit var INSTANCE: AsteroidDatabase
