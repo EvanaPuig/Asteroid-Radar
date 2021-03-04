@@ -34,7 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_small"
-                android:text="@{asteroid.codename}" />
+                android:text="@{asteroid.codename}"
+                android:contentDescription="@{asteroid.codename}"/>
 
             <TextView
                 android:id="@+id/asteroid_approach_date_text_view"
@@ -43,7 +44,8 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_small"
                 android:text="@{asteroid.closeApproachDate}"
-                android:textColor="@color/default_text_color" />
+                android:textColor="@color/default_text_color"
+                android:contentDescription="@{asteroid.closeApproachDate}"/>
         </LinearLayout>
 
         <ImageView

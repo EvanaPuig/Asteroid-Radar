@@ -43,8 +43,8 @@ data class DatabasePictureOfDay constructor(
 
 fun DatabasePictureOfDay.asPictureOfDayDomainModel(): PictureOfDay {
     return PictureOfDay(
-            url = this.url,
-            mediaType = this.mediaType,
-            title = this.title
-        )
+        url = this.url,
+        mediaType = this.mediaType,
+        title = this.title
+    )
 }
